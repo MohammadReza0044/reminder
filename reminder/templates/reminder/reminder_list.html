@@ -1,3 +1,4 @@
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,40 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reminder_list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <p style='text-align: center;'>لیست ریماندرها</p>
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-success" type="button">اضافه کردن ریمیاندر جدید</button>
+
+    
+      <h1 style='text-align: center;'>لیست یادآوری های نزدیک</h1>
+      <br><br>
+      <!-- <div class="list-group">
+          {% for r in reminder %}
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{r.title}}</h5>
+            <small>{{r.reminder_date}}</small>
+          </div>
+          <p class="mb-1">{{r.message}}</p>
+          {% endfor %}
+        
+        
+      </div> -->
+      
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        {% for r in reminder %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              {{r.title}}
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <p>{{r.message}}</p>
+            </div>
+          </div>
+        </div>
+        
       </div>
-      <br> <br>
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
-          </div>
-          <p class="mb-1">Some placeholder content in a paragraph.</p>
-          <small>And some small print.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Some placeholder content in a paragraph.</p>
-          <small class="text-muted">And some muted small print.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Some placeholder content in a paragraph.</p>
-          <small class="text-muted">And some muted small print.</small>
-        </a>
-      </div>
+      {% endfor %}
     
 </body>
 </html>
