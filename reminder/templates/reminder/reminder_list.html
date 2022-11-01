@@ -11,38 +11,42 @@
 <body>
 
 
-    
-      <h1 style='text-align: center;'>لیست یادآوری های نزدیک</h1>
-      <br><br>
-      <!-- <div class="list-group">
-          {% for r in reminder %}
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{r.title}}</h5>
-            <small>{{r.reminder_date}}</small>
-          </div>
-          <p class="mb-1">{{r.message}}</p>
-          {% endfor %}
-        
-        
-      </div> -->
+    <h1 style='text-align: center;'>اضافه کردن یادآوری جدید</h1>
+    <br><br>
       
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        {% for r in reminder %}
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              {{r.title}}
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-            <div class="accordion-body">
-              <p>{{r.message}}</p>
-            </div>
-          </div>
-        </div>
+      <form class="row g-3" method="POST">
+        {% csrf_token %}  
         
-      </div>
+        <div class="col-md-6">
+          <label for="title" class="form-label">عنوان</label> 
+          <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="col-md-6">
+          <label for="message" class="form-label">پیام</label>
+          <input type="text" class="form-control" id="message" name="message">
+        </div>
+        <div class="col-md-6">
+            <label for="reminder_date" class="form-label">تاریخ</label>
+            <input type="date" class="form-control" id="reminder_date" name="reminder_date">
+        </div>
+        <div class="col-md-6">
+            <label for="reminder_time" class="form-label">ساعت</label>
+            <input type="time" class="form-control" id="reminder_time" name="reminder_time">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">ثبت</button>
+        </div>
+      </form>  
+      <br><br>
+    
+    <h1 style='text-align: center;'>لیست یادآوری های نزدیک</h1>
+    <ul class="list-group">
+      {% for r in reminder %}
+      <a href="reminder/{{r.id}}"><li class="list-group-item">{{r.title}}</li></a>
       {% endfor %}
+    </ul>
+
+      
     
 </body>
 </html>
