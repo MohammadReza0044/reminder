@@ -42,7 +42,7 @@
     <h1 style='text-align: center;'>لیست یادآوری های نزدیک</h1>
     <ul class="list-group">
       {% for r in reminder %}
-      <a href="reminder/{{r.id}}"><li class="list-group-item">{{r.title}}</li></a>
+      <a href="/{{r.id}}"><li class="list-group-item">{{r.title}}</li></a>
       {% endfor %}
     </ul>
 

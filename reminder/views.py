@@ -24,7 +24,7 @@ class reminder_list(View):
             reminder_time = request.POST.get('reminder_time'),
         )
         new_reminder.save()
-        return redirect('/reminder')
+        return redirect('/')
 
 
 class reminder_detail(View):
@@ -35,23 +35,12 @@ class reminder_detail(View):
         context = {'reminder': reminder}
         return render (request, self.template_name, context=context)
 
-    def post(self,request,pk):
-        updated_reminder = Reminder.objects.filter(pk=pk)
 
-        updated_reminder.title = request.POST.get('title'),
-        updated_reminder.message = request.POST.get('message'),
-        updated_reminder.reminder_date = request.POST.get('reminder_date'),
-        updated_reminder.reminder_time = request.POST.get('reminder_time'),
-        
-        updated_reminder.save()
-        return redirect('/reminder')
-
-   
 
 def delete(request,pk):
         reminder = Reminder.objects.filter(pk=pk)
         reminder.delete()
-        return redirect ('/reminder')
+        return redirect ('/')
 
 
 class rimender_Update(UpdateView):
