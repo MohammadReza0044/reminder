@@ -1,8 +1,8 @@
-from typing import Optional
 from django.shortcuts import render , redirect
 from django.views import View
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
+import datetime
 
 from .models import Reminder
 
@@ -13,7 +13,9 @@ class reminder_list(View):
 
     def get(self,request):
         reminder = Reminder.objects.all()
-        context = {'reminder': reminder}
+        today = datetime.date.today()
+        near_reminder = Reminder.objects.filter(show_date = today)
+        context = {'reminder': reminder, 'near_reminder':near_reminder}
         return render (request, self.template_name, context=context)
     
     def post (self,request):
@@ -21,7 +23,7 @@ class reminder_list(View):
             title = request.POST.get('title'),
             message = request.POST.get('message'),
             reminder_date = request.POST.get('reminder_date'),
-            reminder_time = request.POST.get('reminder_time'),
+            show_date = request.POST.get('show_date'),
         )
         new_reminder.save()
         return redirect('/')
@@ -35,7 +37,13 @@ class reminder_detail(View):
         context = {'reminder': reminder}
         return render (request, self.template_name, context=context)
 
+class reminder_total_list(View):
+    template_name = 'reminder/reminder_total_list.html'
 
+    def get(self,request):
+        reminder = Reminder.objects.all().order_by('reminder_date')
+        context = {'reminder': reminder}
+        return render (request, self.template_name, context=context)
 
 def delete(request,pk):
         reminder = Reminder.objects.filter(pk=pk)
